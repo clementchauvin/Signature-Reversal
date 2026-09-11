@@ -1,5 +1,7 @@
 import femr.datasets
 from collections import defaultdict
+from dictionnaire_correspondance_phecode_icd import prepare_icd_to_phecode_mapping
+
 
 # 1. Charger la base
 database = femr.datasets.PatientDatabase('../../synthetic_data/extract_lite') # ou votre chemin STARR
@@ -41,4 +43,6 @@ def dictionnaire_patients_maladie(icd_to_phecodes):#icd_to_phecodes is the dicti
 
     print(f"Historique indexé pour {len(patient_history)} patients.")
     return patient_history, patient_birthdays
+icd_to_phecodes = prepare_icd_to_phecode_mapping()
+dictionnaire_patients_maladie(icd_to_phecodes)
   
