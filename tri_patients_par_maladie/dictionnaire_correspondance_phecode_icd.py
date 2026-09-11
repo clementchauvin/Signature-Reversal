@@ -1,5 +1,9 @@
 import pandas as pd
 from collections import defaultdict
+
+#Donne la correspondnace de code ICD10CM ou ICD9CM vers PheCode. Le dictionnaire est de la forme :
+# {("ICD10CM", "E119"): {"250.2", "250"}
+#Il y a 1876 phecodes uniques. Un code ICD peut correspondre à plusieurs phecodes.
 def prepare_icd_to_phecode_mapping(path_to_csv="phecodes_cm.csv"):
     """
     Prépare un dictionnaire de correspondance entre les codes ICD et les PheCodes.
@@ -18,5 +22,13 @@ def prepare_icd_to_phecode_mapping(path_to_csv="phecodes_cm.csv"):
         key = (row['VOCABULARY_ID'], row['clean_icd'])
         icd_to_phecodes[key].add(str(row['PheCode']))
 
-    return icd_to_phecodes
+    return(icd_to_phecodes)
 
+icd_to_phecodes = prepare_icd_to_phecode_mapping()
+
+# Rassembler tous les PheCodes uniques stockés dans le dictionnaire
+all_phecodes = set().union(*icd_to_phecodes.values())
+
+print(f"Nombre total de PheCodes uniques : {len(all_phecodes)}")
+sample = sorted(list(all_phecodes))[:10]
+print("Exemples de PheCodes :", sample)
