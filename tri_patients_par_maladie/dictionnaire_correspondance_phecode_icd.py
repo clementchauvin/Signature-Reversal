@@ -15,8 +15,8 @@ def prepare_icd_to_phecode_mapping(path_to_csv="phecodes_cm.csv"):
     # Exemple de clé : ("ICD10CM", "E119") -> {"250.2", "250"}
     icd_to_phecodes = defaultdict(set)
     for _, row in phecode_df.iterrows():
-    key = (row['VOCABULARY_ID'], row['clean_icd'])
-    icd_to_phecodes[key].add(str(row['PheCode']))
+        key = (row['VOCABULARY_ID'], row['clean_icd'])
+        icd_to_phecodes[key].add(str(row['PheCode']))
 
     return icd_to_phecodes
 
