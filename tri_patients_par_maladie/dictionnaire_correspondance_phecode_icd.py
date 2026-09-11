@@ -24,11 +24,3 @@ def prepare_icd_to_phecode_mapping(path_to_csv="phecodes_cm.csv"):
 
     return(icd_to_phecodes)
 
-icd_to_phecodes = prepare_icd_to_phecode_mapping()
-
-# Rassembler tous les PheCodes uniques stockés dans le dictionnaire
-all_phecodes = set().union(*icd_to_phecodes.values())
-
-print(f"Nombre total de PheCodes uniques : {len(all_phecodes)}")
-sample = sorted(list(all_phecodes))[:10]
-print("Exemples de PheCodes :", sample)
